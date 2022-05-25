@@ -37,3 +37,9 @@ class ContactList:
         contact = input("What relationship type is the new contact? (friend or family): ")
         if contact.lower() == "friend":
             friend = input("Enter the name of the friend: ")
+            friend_id = input("Enter three digit id number : ")
+            self.friendDict[friend] = friend_id
+        elif contact.lower() == "family":
+            family = input("Enter the name of the family: ")
+            family_id = input("Enter three digit id number")
+            self.familyDict[family] = family_id

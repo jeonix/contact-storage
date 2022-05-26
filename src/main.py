@@ -13,4 +13,3 @@ if __name__ == '__main__':
         csvFile = sys.argv[1]
         before = time.time()
         contacts = ContactList(csvFile=csvFile)
-        contacts.print_dictionary()

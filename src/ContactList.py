@@ -43,3 +43,14 @@ class ContactList:
             family = input("Enter the name of the family: ")
             family_id = input("Enter three digit id number")
             self.familyDict[family] = family_id
+
+    def find_contact(self):
+        contact = input("What is the contact's name you are looking for? ")
+        if contact in self.friendDict.keys() or self.familyDict.keys():
+            print(f"{contact}")
+
+    def contact_menu(self, command):
+        if command.upper() == 'P':
+            self.print_dictionary()
+        elif command.upper() == 'A':
+            self.add_contact()

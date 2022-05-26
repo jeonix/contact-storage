@@ -54,3 +54,5 @@ class ContactList:
             self.print_dictionary()
         elif command.upper() == 'A':
             self.add_contact()
+        elif command.upper() == 'L':
+            self.find_contact()

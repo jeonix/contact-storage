@@ -35,11 +35,12 @@ class Menu:
             for i in range(len(self)):
                 option = self[i]
                 if option is not None:
+                    print(f"{option.command()} - {option.header()}")
                     options += option.command()
 
-            command = input("Please enter a command: ")
+            print(f"\nEnter a {self.header} command ({', '.join(options)})")
+            command = input()
             if self.__is_valid_command(command):
                 return command
             else:
                 print("Please enter one of the letter commands")
-                return

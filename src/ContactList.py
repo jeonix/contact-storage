@@ -1,3 +1,6 @@
+from Menu import Menu
+from MenuOption import MenuOption
+
 class ContactList:
     def __init__(self, csvFile=None):
         self.csvFile = csvFile
@@ -32,6 +35,7 @@ class ContactList:
         elif dictionary.lower() == "family":
             for key in self.familyDict:
                 print(f"{key}'s id number: {self.familyDict.get(key)}")
+        print()
 
     def add_contact(self):
         contact = input("What relationship type is the new contact? (friend or family): ")
@@ -43,16 +47,36 @@ class ContactList:
             family = input("Enter the name of the family: ")
             family_id = input("Enter three digit id number")
             self.familyDict[family] = family_id
+        print()
 
     def find_contact(self):
         contact = input("What is the contact's name you are looking for? ")
-        if contact in self.friendDict.keys() or self.familyDict.keys():
-            print(f"{contact}")
+        if contact in self.friendDict.keys():
+            print(f"{contact}'s id number is: {self.friendDict.get(contact)}")
+        elif contact in self.familyDict.keys():
+            print(f"{contact}'s id number is: {self.familyDict.get(contact)}")
+        else:
+            print(f"{contact} was not found")
+        print()
 
-    def contact_menu(self, command):
-        if command.upper() == 'P':
-            self.print_dictionary()
-        elif command.upper() == 'A':
-            self.add_contact()
-        elif command.upper() == 'L':
-            self.find_contact()
+    def contact_menu(self):
+        menu = Menu("Contact Menu")
+        menu += MenuOption("P", "Print Contacts")
+        menu += MenuOption("A", "Add a new contact")
+        menu += MenuOption("L", "Look up a contact")
+        menu += MenuOption("X", "Exit the program")
+
+        while True:
+            command = menu.prompt()
+            if command.upper() == 'P':
+                self.print_dictionary()
+                continue
+            elif command.upper() == 'A':
+                self.add_contact()
+                continue
+            elif command.upper() == 'L':
+                self.find_contact()
+                continue
+            elif command.upper() == 'X':
+                print("Thank you for using the contact menu")
+                break

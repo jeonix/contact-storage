@@ -1,5 +1,3 @@
-from ContactList import ContactList
-
 class Menu:
     def __init__(self, header):
         self.header = header
@@ -24,9 +22,6 @@ class Menu:
             if command.upper() == self[i].command().upper():
                 return True
         return False
-
-    def menu_option(self, command, description):
-        print(f"{command}: {description}")
 
     def prompt(self):
         while True:

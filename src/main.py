@@ -15,4 +15,4 @@ if __name__ == '__main__':
         contacts.contact_menu()
         after = time.time()
         end_time = after - before
-        print(f"Runtime: {end_time} seconds")
+        print(f"Runtime: {end_time.__round__()} seconds")

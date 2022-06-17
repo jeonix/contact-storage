@@ -49,6 +49,34 @@ class ContactList:
             self.familyDict[family] = family_id
         print()
 
+    def delete_contact(self):
+        contact = input("Is the contact to be deleted friend or family? ")
+        if contact.lower() == "friend":
+            friend = input("What is the contact's name? ")
+            if friend in self.friendDict:
+                print(f"Are you sure you want to delete {friend}?")
+                answer = input("Yes/No: ")
+                if answer.lower() == 'yes':
+                    self.friendDict.pop(friend)
+                else:
+                    return
+            else:
+                print("Contact not found")
+                return
+        elif contact.lower() == 'family':
+            family = input("What is the contact's name? ")
+            if family in self.familyDict:
+                print(f"Are you sure you want to delete {family}?")
+                answer = input("Yes/No: ")
+                if answer.lower() == 'yes':
+                    self.friendDict.pop(family)
+                else:
+                    return
+            else:
+                print("Contact not found")
+                return
+        print()
+
     def find_contact(self):
         contact = input("What is the contact's name you are looking for? ")
         if contact in self.friendDict.keys():
@@ -63,6 +91,7 @@ class ContactList:
         menu = Menu("Contact Menu")
         menu += MenuOption("P", "Print Contacts")
         menu += MenuOption("A", "Add a new contact")
+        menu += MenuOption("D", "Delete a contact")
         menu += MenuOption("L", "Look up a contact")
         menu += MenuOption("X", "Exit the program")
 
@@ -73,6 +102,9 @@ class ContactList:
                 continue
             elif command.upper() == 'A':
                 self.add_contact()
+                continue
+            elif command.upper() == 'D':
+                self.delete_contact()
                 continue
             elif command.upper() == 'L':
                 self.find_contact()

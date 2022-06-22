@@ -18,23 +18,37 @@ class ContactList:
         else:
             print("Invalid input")
 
+    def get_friend_dict(self):
+        return self.friendDict
+
+    def get_family_dict(self):
+        return self.familyDict
+
     def dictate(self):
         file = self.__read_file()
         for line in file:
             contactType = line.rstrip().split(',')
             if contactType[2].replace('"', "") == 'friend':
-                self.friendDict[contactType[0].replace('"', "")] = contactType[1].replace('"', "")
+                self.friendDict[contactType[0].replace('"', "")] = {}
+                self.friendDict[contactType[0].replace('"', "")]['id number'] = contactType[1].replace('"', "")
+                self.friendDict[contactType[0].replace('"', "")]['relationship'] = contactType[2].replace('"', "")
+                self.friendDict[contactType[0].replace('"', "")]['job title'] = contactType[3].replace('"', "")
+                self.friendDict[contactType[0].replace('"', "")]['birthdate'] = contactType[4].replace('"', "")
             elif contactType[2].replace('"', "") == 'family':
-                self.familyDict[contactType[0].replace('"', "")] = contactType[1].replace('"', "")
+                self.familyDict[contactType[0].replace('"', "")] = {}
+                self.familyDict[contactType[0].replace('"', "")]['id number'] = contactType[1].replace('"', "")
+                self.familyDict[contactType[0].replace('"', "")]['relationship'] = contactType[2].replace('"', "")
+                self.familyDict[contactType[0].replace('"', "")]['job title'] = contactType[3].replace('"', "")
+                self.familyDict[contactType[0].replace('"', "")]['birthdate'] = contactType[4].replace('"', "")
 
     def print_dictionary(self):
         dictionary = input("Which contact list would you like? (friend or family): ")
         if dictionary.lower() == "friend":
             for key in self.friendDict:
-                print(f"{key}'s id number: {self.friendDict.get(key)}")
+                print(f"{key} : {self.friendDict.get(key)}")
         elif dictionary.lower() == "family":
             for key in self.familyDict:
-                print(f"{key}'s id number: {self.familyDict.get(key)}")
+                print(f"{key} : {self.familyDict.get(key)}")
         print()
 
     def add_contact(self):

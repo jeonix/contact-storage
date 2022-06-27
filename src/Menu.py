@@ -2,7 +2,7 @@ class Menu:
     def __init__(self, header):
         self.header = header
         self.__m_options = []
-        print(f"\n{header}")
+        print(f"\n--{header}--")
 
     def __iadd__(self, option):
         self.__m_options.append(option)

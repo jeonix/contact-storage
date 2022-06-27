@@ -55,12 +55,22 @@ class ContactList:
         contact = input("What relationship type is the new contact? (friend or family): ")
         if contact.lower() == "friend":
             friend = input("Enter the name of the friend: ")
-            friend_id = input("Enter three digit id number : ")
-            self.friendDict[friend] = friend_id
+            friend_id = input("Enter three digit id number: ")
+            job_title = input("Enter friend's job title: ")
+            birthdate = input("Enter friend's birthdate in format MONTH_DAY: ")
+            self.friendDict[friend]['id_number'] = friend_id
+            self.friendDict[friend]['relationship'] = 'friend'
+            self.friendDict[friend]['job_title'] = job_title
+            self.friendDict[friend]['birthdate'] = birthdate
         elif contact.lower() == "family":
             family = input("Enter the name of the family: ")
-            family_id = input("Enter three digit id number")
-            self.familyDict[family] = family_id
+            family_id = input("Enter three digit id number: ")
+            job_title = input("Enter family's job title: ")
+            birthdate = input("Enter family's birthdate in format MONTH_DAY: ")
+            self.familyDict[family]['id_number'] = family_id
+            self.familyDict[family]['relationship'] = 'family'
+            self.familyDict[family]['job_title'] = job_title
+            self.familyDict[family]['birthdate'] = birthdate
         print()
 
     def delete_contact(self):
@@ -69,37 +79,44 @@ class ContactList:
             friend = input("What is the contact's name? ")
             if friend in self.friendDict:
                 print(f"Are you sure you want to delete {friend}?")
-                answer = input("Yes/No: ")
-                if answer.lower() == 'yes':
+                if self.yes_or_no():
                     self.friendDict.pop(friend)
+                    print(f"{friend} has been deleted")
                 else:
                     return
             else:
-                print("Contact not found")
+                print(f"{friend} not found")
                 return
         elif contact.lower() == 'family':
             family = input("What is the contact's name? ")
             if family in self.familyDict:
                 print(f"Are you sure you want to delete {family}?")
-                answer = input("Yes/No: ")
-                if answer.lower() == 'yes':
+                if self.yes_or_no():
                     self.friendDict.pop(family)
+                    print(f"{family} has been deleted")
                 else:
                     return
             else:
-                print("Contact not found")
+                print(f"{family} not found")
                 return
         print()
 
     def find_contact(self):
         contact = input("What is the contact's name you are looking for? ")
         if contact in self.friendDict.keys():
-            print(f"{contact}'s id number is: {self.friendDict.get(contact)}")
+            print(f"{contact} : {self.friendDict.get(contact)}")
         elif contact in self.familyDict.keys():
-            print(f"{contact}'s id number is: {self.familyDict.get(contact)}")
+            print(f"{contact} : {self.familyDict.get(contact)}")
         else:
             print(f"{contact} was not found")
         print()
+
+    def yes_or_no(self) -> bool:
+        answer = input("Yes/No? : ")
+        if answer.lower().rstrip() == 'yes':
+            return True
+        elif answer.lower().rstrip() == 'no':
+            return False
 
     def contact_menu(self):
         menu = Menu("Contact Menu")
